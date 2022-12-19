@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: postgres_db_container
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    env_file:
+      - patient_info_graphql/patient_info_graphql/.env
+    restart: always
+
+  backend:
+    build: .
+    image: patient_info_graphql
+    container_name: patient_info_graphql_container
+    ports:
+      - 8000:8000
+    expose:
+      - 8000  # only expose this port to specific services on the same network
+    volumes: 
+      - ./patient_info_graphql:/patient_info_graphql
+      - ./patient_info_graphql/static_volume:/home/patient_info_graphql/staticfiles
+      - ./patient_info_graphql/media_volume:/home/patient_info_graphql/mediafiles
+    # command: python3 patient_info_graphql/manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "cd patient_info_graphql && gunicorn patient_info_graphql.wsgi:application --bind 0.0.0.0:8000" 
+    depends_on:
+      - db
+
+  nginx:
+    build: ./nginx
+    image: nginx
+    container_name: nginx_container
+    ports:
+      - 1337:80
+    depends_on:
+      - backend
+    volumes:
+      - ./patient_info_graphql/static_volume:/home/patient_info_graphql/staticfiles
+      - ./patient_info_graphql/media_volume:/home/patient_info_graphql/mediafiles
