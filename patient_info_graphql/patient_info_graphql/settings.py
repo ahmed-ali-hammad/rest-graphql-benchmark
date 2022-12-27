@@ -1,6 +1,7 @@
-from pathlib import Path
-import environ
 import os
+from pathlib import Path
+
+import environ
 
 # loading environment values 
 env = environ.Env(
@@ -28,6 +29,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    "patient",
+    
+    # external libraries
+    "phonenumber_field",
 ]
 
 MIDDLEWARE = [
