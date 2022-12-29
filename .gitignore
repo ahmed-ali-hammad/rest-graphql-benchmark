@@ -7,3 +7,5 @@ venv/
 
 # Database
 data/
+
+static_volume/
