@@ -10,4 +10,5 @@ psycopg2-binary==2.9.5
 sqlparse==0.4.3
 django-phonenumber-field==7.0.1
 django-phonenumbers==1.0.1
+pydot==1.4.2
 
