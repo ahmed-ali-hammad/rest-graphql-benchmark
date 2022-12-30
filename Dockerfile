@@ -1,4 +1,7 @@
-FROM python:3.9-slim-buster
+FROM python:3.12.0a3-buster
+
+RUN apt update
+RUN apt -y install graphviz
 
 WORKDIR /home
 
@@ -14,7 +17,7 @@ COPY ./patient_info_graphql ./patient_info_graphql
 
 # for serving the static files
 ENV APP_HOME=patient_info_graphql
-RUN mkdir $APP_HOME/staticfiles
-RUN mkdir $APP_HOME/mediafiles
+RUN mkdir -p $APP_HOME/staticfiles
+RUN mkdir -p $APP_HOME/mediafiles
 
 # CMD [ "python", "patient_info_graphql/manage.py", "runserver", "0.0.0.0:8000"]
