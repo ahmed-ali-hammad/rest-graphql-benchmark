@@ -24,7 +24,7 @@ services:
       - ./patient_info_graphql/media_volume:/home/patient_info_graphql/mediafiles
     # command: python3 patient_info_graphql/manage.py runserver 0.0.0.0:8000
     command: >
-      sh -c "cd patient_info_graphql && python manage.py collectstatic --noinput && gunicorn patient_info_graphql.wsgi:application --bind 0.0.0.0:8000" 
+      sh -c "cd patient_info_graphql && python3 manage.py collectstatic --noinput && gunicorn patient_info_graphql.wsgi:application --bind 0.0.0.0:8000" 
     depends_on:
       - db
 
