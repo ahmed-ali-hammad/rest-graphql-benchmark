@@ -55,7 +55,7 @@ class EmergencyContact(TimeStampedModel):
     last_name = models.CharField(max_length=225)
     email = models.EmailField(max_length=250)
     phone = PhoneNumberField()
-    relationship = models.IntegerField(choices=RELATIONSHIP_CHOICES, max_length=250)
+    relationship = models.IntegerField(choices=RELATIONSHIP_CHOICES)
 
     class Meta:
         verbose_name = _('Emergency Contact')
