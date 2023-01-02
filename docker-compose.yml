@@ -12,12 +12,14 @@ services:
 
   backend:
     build: .
-    image: patient_info_graphql
+    image: 236377781899.dkr.ecr.us-east-1.amazonaws.com/django-ec2:patient_info_graphql
     container_name: patient_info_graphql_container
     ports:
       - 8000:8000
     expose:
       - 8000  # only expose this port to specific services on the same network
+    env_file:
+      - patient_info_graphql/patient_info_graphql/.env
     volumes: 
       - ./patient_info_graphql:/home/patient_info_graphql
       - ./patient_info_graphql/static_volume:/home/patient_info_graphql/staticfiles
@@ -30,7 +32,7 @@ services:
 
   nginx:
     build: ./nginx
-    image: nginx
+    image: 236377781899.dkr.ecr.us-east-1.amazonaws.com/django-ec2:nginx
     container_name: nginx_container
     ports:
       - 1337:80

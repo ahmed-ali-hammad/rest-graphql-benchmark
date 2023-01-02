@@ -5,6 +5,9 @@ __pycache__/
 .env
 venv/
 
+# The ssh key to the instant 
+django_graph.pem
+
 # Database
 data/
 
