@@ -18,7 +18,13 @@ SECRET_KEY = env('SECRET_KEY')
 # False if not in os.environ because of casting above
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env('ALLOWED_HOSTS', default=[])
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:1337']
+
+GRAPHENE = {
+    'SCHEMA': "patient.schema.schema" 
+}
 
 # Application definition
 
@@ -35,6 +41,8 @@ INSTALLED_APPS = [
     # external libraries
     "phonenumber_field",
     "django_extensions",
+    'graphene_django',
+    'django_seed',
 ]
 
 MIDDLEWARE = [

@@ -12,3 +12,5 @@ django-phonenumber-field==7.0.1
 django-phonenumbers==1.0.1
 pydot==1.4.2
 tzdata==2022.7
+graphene-django==3.0.0
+django-seed==0.3.1
