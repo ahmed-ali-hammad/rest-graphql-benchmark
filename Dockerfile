@@ -20,14 +20,14 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /home
 
 # copying the application files to the server
-COPY ./patient_info_graphql ./patient_info_graphql
+COPY ./patient_info ./patient_info
 
 # for serving the static files
-ENV APP_HOME=patient_info_graphql
+ENV APP_HOME=patient_info
 RUN mkdir -p $APP_HOME/staticfiles
 RUN mkdir -p $APP_HOME/mediafiles
 
 COPY ./requirements.txt .
 RUN pip3 install -r requirements.txt
 
-# CMD [ "python3", "patient_info_graphql/manage.py", "runserver", "0.0.0.0:8000"]
+# CMD [ "python3", "patient_info/manage.py", "runserver", "0.0.0.0:8000"]

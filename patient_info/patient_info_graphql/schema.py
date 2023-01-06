@@ -1,6 +1,8 @@
-from graphene_django import DjangoObjectType
 import graphene
-from patient.models import Patient
+from graphene_django import DjangoObjectType
+
+from patient_info_graphql.models import Patient
+
 
 class PatientType(DjangoObjectType):
     class Meta:

@@ -14,3 +14,4 @@ pydot==1.4.2
 tzdata==2022.7
 graphene-django==3.0.0
 django-seed==0.3.1
+djangorestframework==3.14.0
