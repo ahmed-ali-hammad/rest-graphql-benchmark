@@ -23,7 +23,7 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS', default=[])
 CSRF_TRUSTED_ORIGINS = ['http://localhost:1337']
 
 GRAPHENE = {
-    'SCHEMA': "patient.schema.schema" 
+    'SCHEMA': "patient_info_graphql.schema.schema" 
 }
 
 # Application definition
@@ -36,13 +36,15 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "patient",
+    "patient_info_graphql",
+    "patient_info_restapi",
     
     # external libraries
     "phonenumber_field",
     "django_extensions",
     'graphene_django',
     'django_seed',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +57,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "patient_info_graphql.urls"
+ROOT_URLCONF = "patient_info.urls"
 
 TEMPLATES = [
     {
@@ -73,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "patient_info_graphql.wsgi.application"
+WSGI_APPLICATION = "patient_info.wsgi.application"
 
 
 # Database
