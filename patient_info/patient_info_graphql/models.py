@@ -145,7 +145,7 @@ class Allergy(TimeStampedModel):
     description = models.TextField()
     symptoms = models.TextField()
     causes = models.TextField()
-    medication = models.ForeignKey(Medication, related_name="related_allergies", on_delete=models.PROTECT) 
+    medication = models.ForeignKey(Medication, related_name="related_allergies", on_delete=models.PROTECT)
 
     class Meta:
         verbose_name = _('Allergy')

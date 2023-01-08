@@ -1,20 +1,14 @@
+from rest_framework import serializers
+
 from patient_info_graphql.models import (Address, Allergy, Doctor,
                                          EmergencyContact, Illness,
                                          MedicalRecord, Medication, Patient,
                                          Surgery)
-from rest_framework import serializers
 
 
 class VerifyPatientIDSerializer(serializers.Serializer):
     patient_id = serializers.IntegerField(required=True)
 
-    def validate(self, data):
-        """
-        Check that start is before finish.
-        """
-        if Patient.objects.filter(id=data['patient_id'] ).first() is None:
-            raise serializers.ValidationError("Patient doesn't exist.")
-        return data
 
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,6 +31,7 @@ class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
         fields = "__all__"
+
 
 class AllergySerializer(serializers.ModelSerializer):
     class Meta:
