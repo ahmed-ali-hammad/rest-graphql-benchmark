@@ -1,6 +1,5 @@
 import graphene
 from graphene_django import DjangoObjectType
-
 from patient_info_graphql.models import Patient
 
 

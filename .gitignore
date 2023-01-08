@@ -11,4 +11,5 @@ django_graph.pem
 # Database
 data/
 
+# djagno static files
 static_volume/

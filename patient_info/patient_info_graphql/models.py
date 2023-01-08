@@ -91,9 +91,9 @@ class Doctor(TimeStampedModel):
         verbose_name_plural = _('Doctors')
 
 
-class MedicalHistory(TimeStampedModel):
+class MedicalRecord(TimeStampedModel):
     """Stores the medical history for a patient"""
-    patient = models.ForeignKey(Patient, related_name="medical_histories", on_delete=models.PROTECT)
+    patient = models.ForeignKey(Patient, related_name="medical_records", on_delete=models.PROTECT)
     illnesses = models.ForeignKey("Illness", related_name="medical_histories", on_delete=models.PROTECT, null=True, blank=True)
     allergies = models.ForeignKey("Allergy", related_name="medical_histories", on_delete=models.PROTECT, null=True, blank=True)
     surgeries = models.OneToOneField("Surgery", related_name="medical_history", on_delete=models.PROTECT, null=True, blank=True)
@@ -104,8 +104,8 @@ class MedicalHistory(TimeStampedModel):
     surgery_perfomed = models.BooleanField(default=False)
 
     class Meta:
-        verbose_name = _('Medical History')
-        verbose_name_plural = _('Patients Medical History')
+        verbose_name = _('Medical Record')
+        verbose_name_plural = _('Patients Medical Records')
 
 
 class Medication(TimeStampedModel):

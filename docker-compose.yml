@@ -16,8 +16,8 @@ services:
     container_name: patient_info_container
     ports:
       - 8000:8000
-    expose:
-      - 8000  # only expose this port to specific services on the same network
+    # expose:
+    #   - 8000  # only expose this port to specific services on the same network
     env_file:
       - patient_info/patient_info/.env
     volumes: 
@@ -25,19 +25,21 @@ services:
       - ./patient_info/static_volume:/home/patient_info/staticfiles
       - ./patient_info/media_volume:/home/patient_info/mediafiles
     # command: python3 patient_info/manage.py runserver 0.0.0.0:8000
+    # command: >
+    #   sh -c "cd patient_info && python3 manage.py collectstatic --noinput && gunicorn patient_info.wsgi:application --bind 0.0.0.0:8000"
     command: >
-      sh -c "cd patient_info && python3 manage.py collectstatic --noinput && gunicorn patient_info.wsgi:application --bind 0.0.0.0:8000" 
+      sh -c "cd patient_info && python3 manage.py collectstatic --noinput && python3 manage.py runserver 0.0.0.0:8000"  
     depends_on:
       - db
 
-  nginx:
-    build: ./nginx
-    image: 236377781899.dkr.ecr.us-east-1.amazonaws.com/django-ec2:nginx
-    container_name: nginx_container
-    ports:
-      - 1337:80
-    depends_on:
-      - backend
-    volumes:
-      - ./patient_info/static_volume:/home/patient_info/staticfiles
-      - ./patient_info/media_volume:/home/patient_info/mediafiles
+  # nginx:
+  #   build: ./nginx
+  #   image: 236377781899.dkr.ecr.us-east-1.amazonaws.com/django-ec2:nginx
+  #   container_name: nginx_container
+  #   ports:
+  #     - 1337:80
+  #   depends_on:
+  #     - backend
+  #   volumes:
+  #     - ./patient_info/static_volume:/home/patient_info/staticfiles
+  #     - ./patient_info/media_volume:/home/patient_info/mediafiles
