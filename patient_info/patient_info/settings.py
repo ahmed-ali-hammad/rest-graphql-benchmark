@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'django_seed',
     'rest_framework',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "patient_info.wsgi.application"
 
-
 # Database
 DATABASES = {
     'default': {
@@ -101,6 +101,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Patien Info API',
+    'DESCRIPTION': 'API to extract patient info using REST API or GraphQL',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
 
 
 # Internationalization
