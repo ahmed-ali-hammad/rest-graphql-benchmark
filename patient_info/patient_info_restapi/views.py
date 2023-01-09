@@ -1,21 +1,18 @@
-from patient_info_graphql.models import (Address, Allergy, Doctor,
-                                         EmergencyContact, Illness,
-                                         MedicalRecord, Medication, Patient,
-                                         Surgery)
-from patient_info_restapi.serializers import (AddressSerializer,
-                                              AllergySerializer,
-                                              DoctorSerializer,
-                                              EmergencyContactSerializer,
-                                              IllnessSerializer,
-                                              MedicalRecordSerializer,
-                                              MedicationSerializer,
-                                              PatientSerializer,
-                                              SurgerySerializer,
-                                              VerifyPatientIDSerializer)
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+
+from patient_info_graphql.models import (Address, Doctor, EmergencyContact,
+                                         MedicalRecord, Medication, Patient)
+from patient_info_restapi.serializers import (AddressSerializer,
+                                              DoctorSerializer,
+                                              EmergencyContactSerializer,
+                                              MedicalRecordSerializer,
+                                              MedicationSerializer,
+                                              PatientSerializer,
+                                              VerifyPatientIDSerializer)
 
 
 class PatientViewSet(ModelViewSet):
@@ -32,8 +29,7 @@ class EmergencyContactViewSet(ModelViewSet):
         serializer = VerifyPatientIDSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        patient_id = request.data.get('patient_id')
-        emergency_contact = Patient.objects.get(id=patient_id).emergency_contact
+        emergency_contact = get_object_or_404(Patient, id=request.data.get('patient_id')).emergency_contact
 
         return Response(EmergencyContactSerializer(emergency_contact).data, status=status.HTTP_200_OK)
 
@@ -47,10 +43,10 @@ class AddressViewSet(ModelViewSet):
         serializer = VerifyPatientIDSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        patient_id = request.data.get('patient_id')
-        address = Patient.objects.get(id=patient_id).address
+        address = get_object_or_404(Patient, id=request.data.get('patient_id')).address
 
         return Response(AddressSerializer(address).data, status=status.HTTP_200_OK)
+
 
 class DoctorViewSet(ModelViewSet):
     queryset = Doctor.objects.all()
@@ -61,8 +57,7 @@ class DoctorViewSet(ModelViewSet):
         serializer = VerifyPatientIDSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        patient_id = request.data.get('patient_id')
-        doctor = Patient.objects.get(id=patient_id).primary_care_physician
+        doctor = get_object_or_404(Patient, id=request.data.get('patient_id')).primary_care_physician
 
         return Response(DoctorSerializer(doctor).data, status=status.HTTP_200_OK)
 
@@ -76,8 +71,7 @@ class MedicalRecordViewSet(ModelViewSet):
         serializer = VerifyPatientIDSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        patient_id = request.data.get('patient_id')
-        medical_records = Patient.objects.get(id=patient_id).medical_records.all()
+        medical_records = get_object_or_404(Patient, id=request.data.get('patient_id')).medical_records.all()
 
         return Response(MedicalRecordSerializer(medical_records, many=True).data, status=status.HTTP_200_OK)
 
@@ -91,8 +85,7 @@ class MedicationViewSet(ModelViewSet):
         serializer = VerifyPatientIDSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        patient_id = request.data.get('patient_id')
-        medical_records = Patient.objects.get(id=patient_id).medical_records.select_related('illnesses','allergies').filter(is_cured=False)
+        medical_records = get_object_or_404(Patient, id=request.data.get('patient_id')).medical_records.select_related('illnesses', 'allergies').filter(is_cured=False)
 
         medications = []
 
@@ -100,7 +93,4 @@ class MedicationViewSet(ModelViewSet):
             if medical_record.illnesses: medications.append(medical_record.illnesses.medication)
             if medical_record.allergies: medications.append(medical_record.allergies.medication)
 
-
         return Response(MedicationSerializer(medications, many=True).data, status=status.HTTP_200_OK)
-
-

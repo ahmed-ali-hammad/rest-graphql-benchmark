@@ -3,7 +3,7 @@ from pathlib import Path
 
 import environ
 
-# loading environment values 
+# loading environment values
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -18,12 +18,12 @@ SECRET_KEY = env('SECRET_KEY')
 # False if not in os.environ because of casting above
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS', default=[])
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '52.4.29.231']
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:1337']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:1337', 'http://52.4.29.231:1337']
 
 GRAPHENE = {
-    'SCHEMA': "patient_info_graphql.schema.schema" 
+    'SCHEMA': "patient_info_graphql.schema.schema"
 }
 
 # Application definition
@@ -36,10 +36,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    # Project apps
     "patient_info_graphql",
     "patient_info_restapi",
-    
-    # external libraries
+
+    # External libraries
     "phonenumber_field",
     "django_extensions",
     'graphene_django',
@@ -82,10 +83,10 @@ WSGI_APPLICATION = "patient_info.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('POSTGRES_DB'), 
+        'NAME': env('POSTGRES_DB'),
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': "db", 
+        'HOST': "db",
         'PORT': '5432',
     }
 }
@@ -97,9 +98,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 
 REST_FRAMEWORK = {

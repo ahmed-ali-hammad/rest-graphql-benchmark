@@ -1,5 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
+
 from patient_info_graphql.models import Patient
 
 
@@ -14,5 +15,6 @@ class PatientQuery(graphene.ObjectType):
 
     def resolve_users(root, info):
         return Patient.objects.all()
+
 
 schema = graphene.Schema(query=PatientQuery)

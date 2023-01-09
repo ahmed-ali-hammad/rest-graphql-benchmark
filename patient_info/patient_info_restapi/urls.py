@@ -1,8 +1,9 @@
+from rest_framework import routers
+
 from patient_info_restapi.views import (AddressViewSet, DoctorViewSet,
                                         EmergencyContactViewSet,
                                         MedicalRecordViewSet,
                                         MedicationViewSet, PatientViewSet)
-from rest_framework import routers
 
 app_name = "patient_info_restapi"
 
@@ -16,5 +17,3 @@ router.register('medical_records', MedicalRecordViewSet)
 router.register('medications', MedicationViewSet)
 
 urlpatterns = router.urls
-
-

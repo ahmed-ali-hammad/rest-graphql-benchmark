@@ -24,7 +24,6 @@ services:
       - ./patient_info:/home/patient_info
       - ./patient_info/static_volume:/home/patient_info/staticfiles
       - ./patient_info/media_volume:/home/patient_info/mediafiles
-    # command: python3 patient_info/manage.py runserver 0.0.0.0:8000
     # command: >
     #   sh -c "cd patient_info && python3 manage.py collectstatic --noinput && gunicorn patient_info.wsgi:application --bind 0.0.0.0:8000"
     command: >
