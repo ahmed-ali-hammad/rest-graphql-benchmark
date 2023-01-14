@@ -1,9 +1,8 @@
-from rest_framework import routers
-
 from patient_info_restapi.views import (AddressViewSet, DoctorViewSet,
                                         EmergencyContactViewSet,
                                         MedicalRecordViewSet,
                                         MedicationViewSet, PatientViewSet)
+from rest_framework import routers
 
 app_name = "patient_info_restapi"
 

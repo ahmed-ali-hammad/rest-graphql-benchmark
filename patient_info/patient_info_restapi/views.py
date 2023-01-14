@@ -1,9 +1,4 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import status
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
-
 from patient_info_graphql.models import (Address, Doctor, EmergencyContact,
                                          MedicalRecord, Medication, Patient)
 from patient_info_restapi.serializers import (AddressSerializer,
@@ -13,6 +8,10 @@ from patient_info_restapi.serializers import (AddressSerializer,
                                               MedicationSerializer,
                                               PatientSerializer,
                                               VerifyPatientIDSerializer)
+from rest_framework import status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 
 class PatientViewSet(ModelViewSet):

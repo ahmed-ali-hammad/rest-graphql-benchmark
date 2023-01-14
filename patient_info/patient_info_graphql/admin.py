@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from patient_info_graphql.models import (Address, Allergy, Doctor,
                                          EmergencyContact, Illness,
                                          MedicalRecord, Medication, Patient,
