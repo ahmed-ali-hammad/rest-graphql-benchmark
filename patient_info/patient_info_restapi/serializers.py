@@ -1,9 +1,8 @@
-from rest_framework import serializers
-
 from patient_info_graphql.models import (Address, Allergy, Doctor,
                                          EmergencyContact, Illness,
                                          MedicalRecord, Medication, Patient,
                                          Surgery)
+from rest_framework import serializers
 
 
 class VerifyPatientIDSerializer(serializers.Serializer):
