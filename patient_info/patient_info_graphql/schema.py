@@ -1,7 +1,9 @@
 import graphene
 from graphene_django import DjangoObjectType
-from patient_info_graphql.models import (Address, Doctor, EmergencyContact,
-                                         MedicalRecord, Medication, Patient)
+from patient_info_graphql.models import (Address, Allergy, Doctor,
+                                         EmergencyContact, Illness,
+                                         MedicalRecord, Medication, Patient,
+                                         Surgery)
 
 
 class PatientType(DjangoObjectType):
@@ -25,6 +27,24 @@ class AddressType(DjangoObjectType):
 class DoctorType(DjangoObjectType):
     class Meta:
         model = Doctor
+        fields = '__all__'
+
+
+class IllnessType(DjangoObjectType):
+    class Meta:
+        model = Illness
+        fields = '__all__'
+
+
+class AllergyType(DjangoObjectType):
+    class Meta:
+        model = Allergy
+        fields = '__all__'
+
+
+class SurgeryType(DjangoObjectType):
+    class Meta:
+        model = Surgery
         fields = '__all__'
 
 
