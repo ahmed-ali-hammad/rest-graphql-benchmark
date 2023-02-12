@@ -85,6 +85,7 @@ class Doctor(TimeStampedModel):
     city = models.CharField(_('city'), max_length=255)
     state = models.CharField(_('state'), max_length=255)
     zip_code = models.PositiveIntegerField(_('zip code'))
+    practice = models.TextField()
 
     class Meta:
         verbose_name = _('Doctor')
@@ -127,6 +128,7 @@ class Medication(TimeStampedModel):
 class Illness(TimeStampedModel):
     """stores information about a specific illness"""
     title = models.CharField(max_length=225)
+    description = models.TextField()
     is_curable = models.BooleanField(default=True)
     vaccine_available = models.BooleanField(default=False)
     symptoms = models.TextField()
