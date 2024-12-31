@@ -42,6 +42,11 @@ source ./config/.env    # add the environment variables to the running terminal
 python3 manage.py collectstatic --noinput && python3 manage.py runserver 0.0.0.0:8000
 ```
 
+- API Docs [http://0.0.0.0:8000/api/schema/swagger-ui/]
+- Django Admin [http://0.0.0.0:8000/admin/login/?next=/admin/]
+
+- GraphQL [http://0.0.0.0:8000/patient_info_graphql/patient/]
+
 ### 🧪 Running the tests <a name = "tests"></a>
 [pytest](https://docs.pytest.org/) is used for testing.
 
