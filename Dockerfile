@@ -12,10 +12,11 @@ COPY ./requirements.txt .
 RUN pip3 install -r requirements.txt
 
 COPY ./patient_info ./patient_info
+COPY setup.cfg setup.cfg 
 
 # for serving the static files
 ENV APP_HOME=patient_info
 RUN mkdir -p $APP_HOME/staticfiles
 RUN mkdir -p $APP_HOME/mediafiles
 
-# CMD [ "python3", "patient_info/manage.py", "runserver", "0.0.0.0:8000"]
+WORKDIR /home/patient_info

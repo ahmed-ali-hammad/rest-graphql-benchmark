@@ -13,18 +13,16 @@ environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
 
 # False if not in os.environ because of casting above
-DEBUG = env('DEBUG')
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '52.4.29.231']
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "52.4.29.231"]
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:1337', 'http://52.4.29.231:1337']
+CSRF_TRUSTED_ORIGINS = ["http://localhost:1337", "http://52.4.29.231:1337"]
 
-GRAPHENE = {
-    'SCHEMA': "patient_info_graphql.schema.schema"
-}
+GRAPHENE = {"SCHEMA": "patient_info_graphql.schema.schema"}
 
 # Application definition
 
@@ -35,18 +33,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # Project apps
     "patient_info_graphql",
     "patient_info_restapi",
-
     # External libraries
     "phonenumber_field",
     "django_extensions",
-    'graphene_django',
-    'django_seed',
-    'rest_framework',
-    'drf_spectacular',
+    "graphene_django",
+    "django_seed",
+    "rest_framework",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -81,13 +77,13 @@ WSGI_APPLICATION = "patient_info.wsgi.application"
 
 # Database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('POSTGRES_DB'),
-        'USER': env('POSTGRES_USER'),
-        'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': "postgres_db_container",
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": env("POSTGRES_DB"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": "patient_info_db",
+        "PORT": "5432",
     }
 }
 
@@ -98,20 +94,26 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Patien Info API',
-    'DESCRIPTION': 'API to extract patient info using REST API or GraphQL',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
+    "TITLE": "Patien Info API",
+    "DESCRIPTION": "API to extract patient info using REST API or GraphQL",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 

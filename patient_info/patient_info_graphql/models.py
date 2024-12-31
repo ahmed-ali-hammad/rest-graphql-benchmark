@@ -19,7 +19,9 @@ class Patient(TimeStampedModel):
     last_name = models.CharField(max_length=225)
     email = models.EmailField(max_length=250)
     phone = PhoneNumberField()
-    primary_care_physician = models.ForeignKey('Doctor', related_name="patients", on_delete=models.PROTECT)
+    primary_care_physician = models.ForeignKey(
+        "Doctor", related_name="patients", on_delete=models.PROTECT
+    )
     date_of_birth = models.DateField()
     gender = models.IntegerField(choices=GENDER_CHOICES)
     weight = models.FloatField()
@@ -29,8 +31,8 @@ class Patient(TimeStampedModel):
     is_married = models.BooleanField(default=False)
 
     class Meta:
-        verbose_name = _('Patient')
-        verbose_name_plural = _('Patients')
+        verbose_name = _("Patient")
+        verbose_name_plural = _("Patients")
 
 
 class EmergencyContact(TimeStampedModel):
@@ -50,7 +52,9 @@ class EmergencyContact(TimeStampedModel):
         (friend, "FRIEND"),
     )
 
-    patient = models.OneToOneField(Patient, related_name='emergency_contact', on_delete=models.PROTECT)
+    patient = models.OneToOneField(
+        Patient, related_name="emergency_contact", on_delete=models.PROTECT
+    )
     first_name = models.CharField(max_length=225)
     last_name = models.CharField(max_length=225)
     email = models.EmailField(max_length=250)
@@ -58,46 +62,71 @@ class EmergencyContact(TimeStampedModel):
     relationship = models.IntegerField(choices=RELATIONSHIP_CHOICES)
 
     class Meta:
-        verbose_name = _('Emergency Contact')
-        verbose_name_plural = _('Emergency Contacts')
+        verbose_name = _("Emergency Contact")
+        verbose_name_plural = _("Emergency Contacts")
 
 
 class Address(TimeStampedModel):
     """Stores a single address entry"""
-    patient = models.OneToOneField(Patient, related_name='address', on_delete=models.PROTECT)
-    street_address_1 = models.TextField(_('street address 1'))
-    street_address_2 = models.TextField(_('street address 2'), blank=True, null=True)
-    city = models.CharField(_('city'), max_length=255)
-    state = models.CharField(_('state'), max_length=255)
-    zip_code = models.PositiveIntegerField(_('zip code'))
+
+    patient = models.OneToOneField(
+        Patient, related_name="address", on_delete=models.PROTECT
+    )
+    street_address_1 = models.TextField(_("street address 1"))
+    street_address_2 = models.TextField(_("street address 2"), blank=True, null=True)
+    city = models.CharField(_("city"), max_length=255)
+    state = models.CharField(_("state"), max_length=255)
+    zip_code = models.PositiveIntegerField(_("zip code"))
 
     class Meta:
-        verbose_name = _('Address')
-        verbose_name_plural = _('Addresses')
+        verbose_name = _("Address")
+        verbose_name_plural = _("Addresses")
 
 
 class Doctor(TimeStampedModel):
     """Stores a single address entry"""
+
     first_name = models.CharField(max_length=225)
     last_name = models.CharField(max_length=225)
     phone = PhoneNumberField()
     email = models.EmailField(max_length=250)
-    city = models.CharField(_('city'), max_length=255)
-    state = models.CharField(_('state'), max_length=255)
-    zip_code = models.PositiveIntegerField(_('zip code'))
+    city = models.CharField(_("city"), max_length=255)
+    state = models.CharField(_("state"), max_length=255)
+    zip_code = models.PositiveIntegerField(_("zip code"))
     practice = models.TextField()
 
     class Meta:
-        verbose_name = _('Doctor')
-        verbose_name_plural = _('Doctors')
+        verbose_name = _("Doctor")
+        verbose_name_plural = _("Doctors")
 
 
 class MedicalRecord(TimeStampedModel):
     """Stores the medical history for a patient"""
-    patient = models.ForeignKey(Patient, related_name="medical_records", on_delete=models.PROTECT)
-    illnesses = models.ForeignKey("Illness", related_name="medical_histories", on_delete=models.PROTECT, null=True, blank=True)
-    allergies = models.ForeignKey("Allergy", related_name="medical_histories", on_delete=models.PROTECT, null=True, blank=True)
-    surgeries = models.OneToOneField("Surgery", related_name="medical_history", on_delete=models.PROTECT, null=True, blank=True)
+
+    patient = models.ForeignKey(
+        Patient, related_name="medical_records", on_delete=models.PROTECT
+    )
+    illnesses = models.ForeignKey(
+        "Illness",
+        related_name="medical_histories",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+    )
+    allergies = models.ForeignKey(
+        "Allergy",
+        related_name="medical_histories",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+    )
+    surgeries = models.OneToOneField(
+        "Surgery",
+        related_name="medical_history",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+    )
     date_of_discovery = models.DateField()
     physician_notes = models.TextField(null=True, blank=True)
     is_cured = models.BooleanField(default=False)
@@ -105,12 +134,13 @@ class MedicalRecord(TimeStampedModel):
     surgery_perfomed = models.BooleanField(default=False)
 
     class Meta:
-        verbose_name = _('Medical Record')
-        verbose_name_plural = _('Patients Medical Records')
+        verbose_name = _("Medical Record")
+        verbose_name_plural = _("Patients Medical Records")
 
 
 class Medication(TimeStampedModel):
     """stores information about the treatment for a specific illness"""
+
     title = models.CharField(max_length=225)
     description = models.TextField()
     side_effect = models.TextField()
@@ -121,12 +151,13 @@ class Medication(TimeStampedModel):
     adverse_reactions = models.TextField()
 
     class Meta:
-        verbose_name = _('Medication')
-        verbose_name_plural = _('Medications')
+        verbose_name = _("Medication")
+        verbose_name_plural = _("Medications")
 
 
 class Illness(TimeStampedModel):
     """stores information about a specific illness"""
+
     title = models.CharField(max_length=225)
     description = models.TextField()
     is_curable = models.BooleanField(default=True)
@@ -134,34 +165,43 @@ class Illness(TimeStampedModel):
     symptoms = models.TextField()
     causes = models.TextField()
     prevention = models.TextField()
-    medication = models.ForeignKey(Medication, related_name="related_illnesses", on_delete=models.PROTECT)
+    medication = models.ForeignKey(
+        Medication, related_name="related_illnesses", on_delete=models.PROTECT
+    )
 
     class Meta:
-        verbose_name = _('Illness')
-        verbose_name_plural = _('Illnesses')
+        verbose_name = _("Illness")
+        verbose_name_plural = _("Illnesses")
 
 
 class Allergy(TimeStampedModel):
     """stores information about a specific allergy"""
+
     title = models.CharField(max_length=225)
     description = models.TextField()
     symptoms = models.TextField()
     causes = models.TextField()
-    medication = models.ForeignKey(Medication, related_name="related_allergies", on_delete=models.PROTECT)
+    medication = models.ForeignKey(
+        Medication, related_name="related_allergies", on_delete=models.PROTECT
+    )
 
     class Meta:
-        verbose_name = _('Allergy')
-        verbose_name_plural = _('Allergies')
+        verbose_name = _("Allergy")
+        verbose_name_plural = _("Allergies")
 
 
 class Surgery(TimeStampedModel):
-    patient = models.ForeignKey(Patient, related_name="surgeries", on_delete=models.PROTECT)
+    patient = models.ForeignKey(
+        Patient, related_name="surgeries", on_delete=models.PROTECT
+    )
     title = models.CharField(max_length=225)
     notes = models.TextField()
     date_of_operation = models.DateTimeField()
     discharge_date = models.DateTimeField(null=True, blank=True)
-    surgeon = models.ForeignKey('Doctor', related_name="surgeries", on_delete=models.PROTECT)
+    surgeon = models.ForeignKey(
+        "Doctor", related_name="surgeries", on_delete=models.PROTECT
+    )
 
     class Meta:
-        verbose_name = _('Surgery')
-        verbose_name_plural = _('Surgeries')
+        verbose_name = _("Surgery")
+        verbose_name_plural = _("Surgeries")

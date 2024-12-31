@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class PatientRestApiConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'patient_info_restapi'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "patient_info_restapi"

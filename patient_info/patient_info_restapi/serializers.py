@@ -1,7 +1,14 @@
-from patient_info_graphql.models import (Address, Allergy, Doctor,
-                                         EmergencyContact, Illness,
-                                         MedicalRecord, Medication, Patient,
-                                         Surgery)
+from patient_info_graphql.models import (
+    Address,
+    Allergy,
+    Doctor,
+    EmergencyContact,
+    Illness,
+    MedicalRecord,
+    Medication,
+    Patient,
+    Surgery,
+)
 from rest_framework import serializers
 
 
@@ -22,7 +29,9 @@ class PatientSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['primary_care_physician'] = DoctorSerializer(instance.primary_care_physician).data
+        response["primary_care_physician"] = DoctorSerializer(
+            instance.primary_care_physician
+        ).data
         return response
 
 
@@ -63,9 +72,9 @@ class MedicalRecordSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['illnesses'] = IllnessSerializer(instance.illnesses).data
-        response['allergies'] = AllergySerializer(instance.allergies).data
-        response['surgeries'] = SurgerySerializer(instance.surgeries).data
+        response["illnesses"] = IllnessSerializer(instance.illnesses).data
+        response["allergies"] = AllergySerializer(instance.allergies).data
+        response["surgeries"] = SurgerySerializer(instance.surgeries).data
         return response
 
 
