@@ -1,8 +1,15 @@
 from django.contrib import admin
-from patient_info_graphql.models import (Address, Allergy, Doctor,
-                                         EmergencyContact, Illness,
-                                         MedicalRecord, Medication, Patient,
-                                         Surgery)
+from patient_info_graphql.models import (
+    Address,
+    Allergy,
+    Doctor,
+    EmergencyContact,
+    Illness,
+    MedicalRecord,
+    Medication,
+    Patient,
+    Surgery,
+)
 
 admin.site.register(Patient)
 admin.site.register(Doctor)
