@@ -2,14 +2,10 @@
 
 <div align="center">
   <img src="https://img.shields.io/badge/status-active-success.svg" />
-  <img src="https://img.shields.io/badge/python-3.13-blue" />
+  <img src="https://img.shields.io/badge/python-3.11-blue" />
 </div>
 
 ---
-
-<p align="center">Rest Graphql Benchmark
-    <br> 
-</p>
 
 ## 📝 Table of Contents
 - [About](#about)
