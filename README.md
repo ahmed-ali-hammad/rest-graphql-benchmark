@@ -1,7 +1,6 @@
 <h3 align="center">Rest Graphql Benchmark</h3>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/status-active-success.svg" />
   <img src="https://img.shields.io/badge/python-3.11-blue" />
 </div>
 
