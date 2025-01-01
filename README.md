@@ -34,7 +34,7 @@ pipenv shell  # spawns a shell within the virtualenv
 ### ▶️ Running the webapp
 ```bash
 source ./config/.env    # add the environment variables to the running terminal
-python3 manage.py collectstatic --noinput && python3 manage.py runserver 0.0.0.0:8000
+python3 patient_info/manage.py collectstatic --noinput && python3 patient_info/manage.py runserver 0.0.0.0:8000
 ```
 
 - API Docs [http://0.0.0.0:8000/api/schema/swagger-ui/]
