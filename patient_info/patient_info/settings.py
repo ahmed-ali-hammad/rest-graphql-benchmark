@@ -1,20 +1,15 @@
 import os
 from pathlib import Path
 
-import environ
+from .config import config
 
-env = environ.Env()
-environ.Env.read_env()
-
+SECRET_KEY = config.secret_key
+DEBUG = config.debug
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-SECRET_KEY = env("SECRET_KEY")
-DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0"]
 
 GRAPHENE = {"SCHEMA": "patient_info_graphql.schema.schema"}
-
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -68,11 +63,11 @@ WSGI_APPLICATION = "patient_info.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": env("POSTGRES_DB"),
-        "USER": env("POSTGRES_USER"),
-        "PASSWORD": env("POSTGRES_PASSWORD"),
-        "HOST": "patient_info_db",
-        "PORT": "5432",
+        "NAME": config.db_name,
+        "USER": config.db_user,
+        "PASSWORD": config.db_password,
+        "HOST": config.db_host,
+        "PORT": config.db_port,
     }
 }
 

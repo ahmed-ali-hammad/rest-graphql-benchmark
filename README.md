@@ -1,15 +1,10 @@
 <h3 align="center">Rest Graphql Benchmark</h3>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/status-active-success.svg" />
-  <img src="https://img.shields.io/badge/python-3.13-blue" />
+  <img src="https://img.shields.io/badge/python-3.11-blue" />
 </div>
 
 ---
-
-<p align="center">Rest Graphql Benchmark
-    <br> 
-</p>
 
 ## 📝 Table of Contents
 - [About](#about)
@@ -39,7 +34,7 @@ pipenv shell  # spawns a shell within the virtualenv
 ### ▶️ Running the webapp
 ```bash
 source ./config/.env    # add the environment variables to the running terminal
-python3 manage.py collectstatic --noinput && python3 manage.py runserver 0.0.0.0:8000
+python3 patient_info/manage.py collectstatic --noinput && python3 patient_info/manage.py runserver 0.0.0.0:8000
 ```
 
 - API Docs [http://0.0.0.0:8000/api/schema/swagger-ui/]
