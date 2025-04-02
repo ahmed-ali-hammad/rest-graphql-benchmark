@@ -16,7 +16,7 @@ services:
       dockerfile: Dockerfile
     container_name: patient_info_dev
     ports:
-      - 8000:8000
+      - 8888:8000
     env_file:
       - config/.env
     volumes: 
