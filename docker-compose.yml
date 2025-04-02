@@ -23,8 +23,6 @@ services:
       - ./:/home/
       - ./patient_info/static_volume:/home/patient_info/staticfiles
       - ./patient_info/media_volume:/home/patient_info/mediafiles
-    # command: >
-    #   sh -c "cd patient_info && python3 manage.py collectstatic --noinput && gunicorn patient_info.wsgi:application --bind 0.0.0.0:8000" 
     # depends_on:
     #   - db
     command: 'sh -c "echo \"Container started\" && while sleep 1; do :; done"'
